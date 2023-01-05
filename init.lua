@@ -176,12 +176,18 @@ function revelation.expose(args)
 
     clients = {}
     clientData = {}
+    
+    local preview_layout = args.layout or awful.layout.suit.fair
+    local gap = args.gap or 0
 
     for scr=1,capi.screen.count() do
         t[scr] = awful.tag.new({revelation.tag_name},
-            scr, awful.layout.suit.fair)[1]
+            scr, preview_layout)[1]
         zt[scr] = awful.tag.new({revelation.tag_name.."_zoom"},
-            scr, awful.layout.suit.fair)[1]
+            scr, preview_layout)[1]
+        
+        t[scr].gap = gap
+        zt[scr].gap = gap
 
         if curr_tag_only then
             match_clients(rule, awful.client.visible(scr), t[scr], is_excluded)
