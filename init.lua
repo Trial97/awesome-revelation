@@ -65,6 +65,9 @@ local clients = {} --Table of clients to be exposed after fitlering
 local clientData = {} -- table that holds the positions and sizes of floating clients
 
 local revelation = {
+    gap = 0,
+    layout = awful.layout.suit.fair,
+    
     -- Name of expose tag.
     tag_name = "Revelation",
 
@@ -177,8 +180,8 @@ function revelation.expose(args)
     clients = {}
     clientData = {}
     
-    local preview_layout = args.layout or awful.layout.suit.fair
-    local gap = args.gap or 0
+    local preview_layout = revelation.layout
+    local gap = revelation.gap
 
     for scr=1,capi.screen.count() do
         t[scr] = awful.tag.new({revelation.tag_name},
